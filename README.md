@@ -1,32 +1,33 @@
-# 📊 GenInvest Copilot : Plateforme d'Analyse Financière & Business Intelligence (PFE ENSIAS)
+# ⚙️ GenInvest Copilot - Backend, Frontend & DevOps (Membre 3)
 
-Plateforme intelligente d'aide à la décision financière combinant l'analyse de données structurées et non structurées, propulsée par une architecture d'agents autonomes et un LLM.
-
----
-
-## 🏗️ Architecture du Projet
-Le projet est conçu pour couvrir l'ensemble des métiers de la data et du génie logiciel :
-* **Data Engineering & Analytics (Membre 1) :** Ingestion des fichiers tabulaires (CSV/Excel) et structuration dans une base de données **PostgreSQL**.
-* **IA & Agents / RAG (Membre 2) :** Recherche sémantique sur rapports PDF (`pgvector`) et architecture multi-agents (**LangGraph** / LangChain).
-* **Software Engineering & DevOps (Membre 3) :** API REST asynchrone (**FastAPI**), interface utilisateur interactive type chat (**Streamlit**) et conteneurisation globale (**Docker Compose**).
+Ce dossier contient la partie **Software Engineering & DevOps** de la plateforme GenInvest Copilot. Elle centralise l'API REST, l'interface utilisateur interactive et l'orchestration des conteneurs.
 
 ---
 
-## 🛠️ Stack Technique
-* **Langage :** Python 3.10+
-* **Backend :** FastAPI, Uvicorn
-* **Frontend :** Streamlit, Plotly, Pandas
-* **Base de données :** PostgreSQL (`pgvector`)
-* **DevOps :** Docker & Docker Compose
+## 📂 Structure du Module
+* `backend/` : API asynchrone développée avec **FastAPI**.
+* `frontend/` : Interface utilisateur moderne de type chat et dashboard développée avec **Streamlit** et **Plotly**.
+* `docker-compose.yml` : Fichier d'orchestration pour packager et lancer l'ensemble des services.
 
 ---
 
-## 🚀 Guide de Lancement rapide (via Docker Compose)
+## 🛠️ Fonctionnalités implémentées
+1. **API REST (FastAPI) :**
+   * Route racine de test (`/`).
+   * Route de récupération des KPIs (`/api/dashboard`).
+   * Route de communication avec le copilote IA (`/api/chat`).
+2. **Interface Utilisateur Pro (Streamlit) :**
+   * Design épuré en mode conversationnel unifié (type ChatGPT).
+   * Affichage dynamique de texte, de sources et de graphiques interactifs (Plotly).
+3. **DevOps & Conteneurisation :**
+   * Dockerfiles optimisés pour le backend et le frontend (Python 3.10-slim).
+   * Orchestration complète via `Docker Compose`.
 
-Pour lancer toute l'application (Backend + Frontend) d'un seul coup :
+---
 
-1. Assure-toi d'avoir **Docker** et **Docker Compose** installés sur ta machine.
-2. Clone le dépôt et place-toi à la racine du projet.
-3. Lance la commande suivante :
-   ```bash
-   docker compose up --build
+## 🚀 Guide de Lancement (Local ou Docker)
+
+### Option 1 : Via Docker Compose (Recommandé)
+Lance toute l'application d'un seul coup à la racine du projet :
+```bash
+sudo docker compose up --build

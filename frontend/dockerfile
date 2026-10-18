@@ -1,0 +1,15 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Copie le requirements.txt depuis la racine du contexte
+COPY requirements.txt .
+
+# Copie tout le contenu du dossier frontend dans /app/frontend
+COPY frontend/ ./frontend/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "frontend/app.py", "--server.address=0.0.0.0", "--server.port=8501"]

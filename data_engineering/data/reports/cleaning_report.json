@@ -1,0 +1,13 @@
+{
+  "rows_raw": 9994,
+  "duplicates_removed": 0,
+  "date_format_used": "%m/%d/%Y",
+  "invalid_dates": 0,
+  "missing_before": {},
+  "rows_dropped_missing_critical": 0,
+  "rows_dropped_invalid_values": 0,
+  "sales_outliers_flagged": 668,
+  "rows_clean": 9994,
+  "date_min": "2014-01-03",
+  "date_max": "2017-12-30"
+}

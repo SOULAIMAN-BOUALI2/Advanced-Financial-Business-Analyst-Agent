@@ -11,7 +11,12 @@ Answer with exactly ONE word among:
 - rag    : the question is about the content of the text documents (reports, PDFs, policies, explanations, risks, strategy)
 - both   : it needs figures AND document content
 - chart  : the user explicitly asks for a chart, graph, plot, pie chart, curve or histogram
-- general: greetings, thanks, or questions about what you can do
+- general: ONLY greetings, thanks, or questions about what this copilot itself can do
+
+Important: if the question is about any concept, component, node, process, rule, risk,
+strategy, task or definition that could be described in the uploaded documents, answer rag,
+even if it is short and does not mention a document. When in doubt between general and rag,
+choose rag.
 
 Question: {question}
 
@@ -45,7 +50,7 @@ Rules:
 - Use the exact numbers from the SQL result. Never invent or estimate figures.
 - When you use document excerpts, cite them as [file, p.page].
 - If the provided information is not enough, say clearly what is missing.
-- Be concise and clear. If a chart was generated, mention it briefly.
+- Be concise and clear. Mention a chart only if one was generated; otherwise never talk about charts.
 
 Question: {question}
 
@@ -61,3 +66,18 @@ Document excerpts:
 Chart: {chart_info}
 
 Final answer:"""
+
+
+GENERAL_PROMPT = """You are a financial and business analyst copilot inside a web dashboard.
+What you can do:
+- answer numeric questions about the sales data (totals, averages, maximums, rankings, trends by region, product or period);
+- search and summarize the content of the uploaded PDF reports, with sources;
+- generate charts (line, bar or pie) when asked.
+
+Reply to the user's message briefly and naturally, in the same language as the message.
+If they ask what you can do, list these capabilities and give two example questions.
+Never invent figures.
+
+Message: {question}
+
+Answer:"""

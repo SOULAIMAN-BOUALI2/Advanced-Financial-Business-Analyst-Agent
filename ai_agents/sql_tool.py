@@ -16,9 +16,9 @@ from decimal import Decimal
 from functools import lru_cache
 
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
 from sqlalchemy import create_engine, text
 
+from ai_agents.llm import ask
 from ai_agents.prompts import TEXT_TO_SQL_PROMPT
 
 load_dotenv()
@@ -123,8 +123,7 @@ def generate_sql(question: str, schema: str, previous_sql: str = "", error: str 
     prompt = TEXT_TO_SQL_PROMPT.format(schema=schema, question=question)
     if error:
         prompt += f"\n\nYour previous query failed.\nQuery: {previous_sql}\nError: {error}\nFix it and output only the corrected SQL."
-    llm = ChatGoogleGenerativeAI(model=LLM_MODEL, temperature=0, timeout=30, max_retries=1)
-    return _clean_llm_sql(_as_text(llm.invoke(prompt).content))
+    return _clean_llm_sql(ask(prompt))
 
 
 # --------------------------------------------------------------- public API

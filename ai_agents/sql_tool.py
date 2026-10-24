@@ -34,6 +34,13 @@ FORBIDDEN = re.compile(
     re.IGNORECASE,
 )
 SYSTEM_TABLES = re.compile(r"\b(langchain_pg_\w+|pg_\w+|information_schema)\b", re.IGNORECASE)
+# The LLM may only read these relations (comma separated in .env). The flat view
+# built by the data engineer already contains the joins, so no JOIN is needed.
+ALLOWED_RELATIONS = {
+    r.strip().lower()
+    for r in os.getenv("SQL_ALLOWED_TABLES", "v_sales_enriched").split(",")
+    if r.strip()
+}
 
 
 # ----------------------------------------------------------------- database
@@ -45,23 +52,39 @@ def get_engine():
     return create_engine(url.replace("postgresql+psycopg2://", "postgresql+psycopg://"))
 
 
+@lru_cache(maxsize=1)
 def get_schema_description() -> str:
-    """Describe the business tables (excludes the vector tables created by LangChain)."""
+    """Describe the allowed relations, with the possible values of small text columns."""
     query = text(
         """
         SELECT table_name, column_name, data_type
         FROM information_schema.columns
-        WHERE table_schema = 'public' AND table_name NOT LIKE 'langchain_pg_%'
+        WHERE table_schema = 'public' AND table_name = ANY(:allowed)
         ORDER BY table_name, ordinal_position
         """
     )
-    tables: dict[str, list[str]] = {}
+    tables: dict[str, list[tuple[str, str]]] = {}
+    lines = []
     with get_engine().connect() as conn:
-        for table, column, dtype in conn.execute(query):
-            tables.setdefault(table, []).append(f"{column} {dtype}")
-    if not tables:
-        return "(no tables found)"
-    return "\n".join(f"{t}({', '.join(cols)})" for t, cols in tables.items())
+        for table, column, dtype in conn.execute(query, {"allowed": sorted(ALLOWED_RELATIONS)}):
+            tables.setdefault(table, []).append((column, dtype))
+        for table, cols in tables.items():
+            parts = []
+            for column, dtype in cols:
+                desc = f"{column} {dtype}"
+                if dtype in ("text", "character varying"):
+                    values = [
+                        row[0]
+                        for row in conn.execute(
+                            text(f'SELECT DISTINCT "{column}" FROM "{table}" '
+                                 f'WHERE "{column}" IS NOT NULL LIMIT 11')
+                        )
+                    ]
+                    if 0 < len(values) <= 10:
+                        desc += " (values: " + ", ".join(sorted(map(str, values))) + ")"
+                parts.append(desc)
+            lines.append(f"{table}({', '.join(parts)})")
+    return "\n".join(lines) if lines else "(no tables found)"
 
 
 # --------------------------------------------------------------- validation
@@ -83,6 +106,12 @@ def validate_sql(sql: str) -> str:
         raise ValueError("The query contains a forbidden keyword.")
     if SYSTEM_TABLES.search(cleaned):
         raise ValueError("Access to system tables is not allowed.")
+    cte_names = {m.lower() for m in re.findall(r"\b(\w+)\s+as\s*\(", cleaned, re.IGNORECASE)}
+    scan = re.sub(r"extract\s*\(\s*\w+\s+from\s+[^)]*\)", " ", cleaned, flags=re.IGNORECASE)
+    for relation in re.findall(r"\b(?:from|join)\s+([a-zA-Z_][\w.]*)", scan, re.IGNORECASE):
+        name = relation.lower().split(".")[-1]
+        if name not in ALLOWED_RELATIONS and name not in cte_names:
+            raise ValueError(f"Table not allowed: {relation}")
     if not re.search(r"\blimit\s+\d+", cleaned, re.IGNORECASE):
         cleaned = f"SELECT * FROM ({cleaned}) AS q LIMIT {MAX_ROWS}"
     return cleaned

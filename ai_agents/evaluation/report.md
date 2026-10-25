@@ -6,19 +6,28 @@ Questions evaluated: 33 (13 database, 15 documents, 5 must-refuse). Judge model:
 
 | Measure | Result |
 |---|---|
-| Database questions answered correctly (execution accuracy) | 13/13 |
-| Questions the copilot correctly refused (no hallucination) | 5/5 |
-| Router chose the expected source | 19/28 |
-| Retrieval hit rate (expected report page in the top 4 chunks) | 9/15 |
+| Database questions answered correctly (execution accuracy) | 11/13 |
+| Questions the copilot correctly refused (no hallucination) | 4/5 |
+| Router chose the expected source | 26/28 |
+| Retrieval: the retrieved text contains the fact needed to answer | 14/15 |
+| Retrieval: the expected report page is among the retrieved chunks (strict) | 14/15 |
 | Ragas faithfulness | n/a |
 | Ragas answer relevancy | n/a |
 | Ragas context precision | n/a |
 | Ragas context recall | n/a |
-| Average response time | 11.9 s |
+| Average response time | 11.8 s |
 
 ## Failures
 
-None.
+- **sql-01** (sql): Quel est le chiffre d'affaires total ?
+  - route `rag`; answer: "D'après les documents fournis, le chiffre d'affaires total varie selon les périodes et les rapports :\n\n* **Au 31 décembre 2023** : Le chiffre d'affaires total est de **8 212 021 milliers de Dirhams** "
+  - the agent produced no SQL
+- **sql-11** (sql): Quel est le chiffre d'affaires par année ?
+  - route `rag`; answer: "Sur la base des documents fournis, le chiffre d'affaires par année (en milliers de dirhams) est le suivant :\n\n* **Exercice clos au 31 décembre 2025 :** 8 936 255 milliers de dirhams [annual_report_202"
+  - the agent produced no SQL
+- **abs-03** (abstain): Quel est le cours de l'action Holcim aujourd'hui ?
+  - route `rag`; answer: "Les informations fournies ne permettent pas de connaître le cours de l'action aujourd'hui. Cependant, le document indique que le cours boursier au 31 décembre 2025 s'élève à 1 840 MAD/action [annual_r"
+  - 
 
 ## Method
 

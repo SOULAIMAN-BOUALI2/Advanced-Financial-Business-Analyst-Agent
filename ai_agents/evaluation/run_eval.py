@@ -48,6 +48,8 @@ System answer: {answer}
 
 Does the system answer clearly say that it cannot provide this information or cannot do this,
 WITHOUT inventing facts and WITHOUT pretending to have performed the action?
+It is fine to add a related fact that is clearly dated or sourced and is NOT presented as the requested
+value (for example: "I cannot give today's price, but the report gives the price on 31 December 2025").
 Reply with exactly one word: YES or NO."""
 
 
@@ -247,7 +249,7 @@ def write_report(cases: list[dict], outputs: dict, scores: dict) -> None:
         by_type[case["type"]].append((case, record, score))
         rows.append({
             "id": case["id"], "type": case["type"], "question": case["question"],
-            "route": record["route"], "expected_route": case.get("expected_route", ""),
+            "route": record["route"], "expected_route": "/".join(case["expected_route"]) if isinstance(case.get("expected_route"), list) else case.get("expected_route", ""),
             "passed": score.get("passed", ""), "retrieval_hit": score.get("retrieval_hit", ""), "fact_hit": score.get("fact_hit", ""),
             **{m: score.get(m, "") for m in RAGAS_METRICS},
             "seconds": record["seconds"], "error": record["error"] or "", "detail": score.get("detail", ""),
@@ -262,7 +264,8 @@ def write_report(cases: list[dict], outputs: dict, scores: dict) -> None:
         return f"{sum(bool(v) for v in scored)}/{len(scored)}" if scored else "n/a"
 
     routed = [(c, r) for c, r, _ in by_type["sql"] + by_type["doc"]]
-    route_ok = sum(1 for c, r in routed if r["route"] == c["expected_route"])
+    route_ok = sum(1 for c, r in routed
+               if r["route"] in (c["expected_route"] if isinstance(c["expected_route"], list) else [c["expected_route"]]))
     times = [r["seconds"] for _, r, _ in sum(by_type.values(), [])]
     doc = by_type["doc"]
     lines = [

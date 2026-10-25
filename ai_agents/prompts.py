@@ -34,6 +34,9 @@ Rules:
   the words "revenue" or "chiffre d'affaires".
 - Questions about customers, orders, products, product categories, regions or segments of the
   database are sql.
+- If the question asks for a revenue figure (chiffre d'affaires, revenue) and names NEITHER a
+  company, a report or a year of the documents NOR anything specific to the database (customer,
+  product, category, region, segment, discount), both sources have such a figure: answer both.
 - If the question could be answered by the documents and is not clearly about the database,
   answer rag. When in doubt between general and rag, choose rag.
 
@@ -68,6 +71,8 @@ Rules:
 - Answer in the same language as the question.
 - Use the exact numbers from the SQL result. Never invent or estimate figures.
 - When you use document excerpts, cite them as [file, p.page].
+- If you have both a SQL result and document excerpts, say clearly which figure comes from the
+  sales database and which comes from the documents (name the report and year); never mix them.
 - If the provided information is not enough, say clearly what is missing.
 - Be concise and clear. Mention a chart only if one was generated; otherwise never talk about charts.
 

@@ -257,9 +257,13 @@
   {
    "id": "sql-01",
    "type": "sql",
-   "expected_route": "sql",
+   "expected_route": [
+    "sql",
+    "both"
+   ],
    "question": "Quel est le chiffre d'affaires total ?",
-   "reference_sql": "SELECT SUM(sales_amount) FROM v_sales_enriched"
+   "reference_sql": "SELECT SUM(sales_amount) FROM v_sales_enriched",
+   "note": "ambiguous on purpose: the database and the reports both have a revenue figure"
   },
   {
    "id": "sql-02",
@@ -327,9 +331,13 @@
   {
    "id": "sql-11",
    "type": "sql",
-   "expected_route": "sql",
+   "expected_route": [
+    "sql",
+    "both"
+   ],
    "question": "Quel est le chiffre d'affaires par année ?",
-   "reference_sql": "SELECT EXTRACT(YEAR FROM date) AS y, SUM(sales_amount) FROM v_sales_enriched GROUP BY y ORDER BY y"
+   "reference_sql": "SELECT EXTRACT(YEAR FROM date) AS y, SUM(sales_amount) FROM v_sales_enriched GROUP BY y ORDER BY y",
+   "note": "ambiguous on purpose: the database and the reports both have a revenue figure"
   },
   {
    "id": "sql-12",

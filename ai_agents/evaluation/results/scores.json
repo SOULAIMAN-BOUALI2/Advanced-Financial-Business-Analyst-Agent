@@ -1,7 +1,7 @@
 {
  "sql-01": {
-  "passed": true,
-  "detail": ""
+  "passed": false,
+  "detail": "the agent produced no SQL"
  },
  "sql-02": {
   "passed": true,
@@ -40,8 +40,8 @@
   "detail": ""
  },
  "sql-11": {
-  "passed": true,
-  "detail": ""
+  "passed": false,
+  "detail": "the agent produced no SQL"
  },
  "sql-12": {
   "passed": true,
@@ -60,7 +60,7 @@
   "detail": ""
  },
  "abs-03": {
-  "passed": true,
+  "passed": false,
   "detail": ""
  },
  "abs-04": {
@@ -72,48 +72,63 @@
   "detail": ""
  },
  "doc-01": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-02": {
-  "retrieval_hit": false
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-03": {
-  "retrieval_hit": false
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-04": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-05": {
-  "retrieval_hit": false
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-06": {
-  "retrieval_hit": false
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-07": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-08": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-09": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-10": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-11": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-12": {
-  "retrieval_hit": false
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-13": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-14": {
-  "retrieval_hit": true
+  "retrieval_hit": true,
+  "fact_hit": true
  },
  "doc-15": {
-  "retrieval_hit": false
+  "retrieval_hit": false,
+  "fact_hit": false
  }
 }

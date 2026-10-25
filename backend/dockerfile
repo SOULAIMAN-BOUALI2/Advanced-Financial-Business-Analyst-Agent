@@ -1,14 +1,17 @@
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 
 # Copie le requirements.txt depuis la racine du contexte
 COPY requirements.txt .
 
-# Copie tout le contenu du dossier backend dans /app/backend
+# Le backend assemble l'API, l'agent et le module analytics.
 COPY backend/ ./backend/
+COPY ai_agents/ ./ai_agents/
+COPY data_engineering/ ./data_engineering/
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r ai_agents/requirements.txt
 
 EXPOSE 8000
 

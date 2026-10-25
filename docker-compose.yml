@@ -1,22 +1,70 @@
-version: '3.8'
-
 services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: geninvest_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-geninvest}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data_engineering/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-postgres} -d $${POSTGRES_DB:-geninvest}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
   backend:
     build:
       context: .
-      dockerfile: backend/Dockerfile
+      dockerfile: backend/dockerfile
     container_name: geninvest_backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-geninvest}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      PDF_COLLECTION: ${PDF_COLLECTION:-pdf_chunks}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-001}
+    volumes:
+      - ./data/pdfs:/app/data/pdfs:ro
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
-      - "8000:8000"
-    restart: always
+      - "8001:8000"
+    restart: unless-stopped
 
   frontend:
     build:
       context: .
-      dockerfile: frontend/Dockerfile
+      dockerfile: frontend/dockerfile
     container_name: geninvest_frontend
     ports:
       - "8501:8501"
     depends_on:
       - backend
-    restart: always
+    restart: unless-stopped
+
+  pdf-indexer:
+    build:
+      context: .
+      dockerfile: backend/dockerfile
+    container_name: geninvest_pdf_indexer
+    profiles: ["index"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-geninvest}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      PDF_COLLECTION: ${PDF_COLLECTION:-pdf_chunks}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-001}
+    volumes:
+      - ./data/pdfs:/app/data/pdfs:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["python", "-m", "ai_agents.index_pdfs", "/app/data/pdfs"]
+
+volumes:
+  postgres_data:

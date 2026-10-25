@@ -1,7 +1,12 @@
 -- Schema PostgreSQL du Copilote BI (Tache 1 - data-pipeline)
 -- Commentaires volontairement sans accents (compatibilite Windows).
 -- ATTENTION : ce script supprime et recree les tables (usage developpement).
--- L'extension pgvector n'est PAS activee ici : elle est geree par le Membre 2.
+
+-- L'image pgvector l'expose, mais l'extension doit etre activee dans chaque base.
+CREATE EXTENSION IF NOT EXISTS vector;
+
+-- Les tables langchain_pg_collection et langchain_pg_embedding sont creees
+-- automatiquement par PGVector lors de la premiere execution de index_pdfs.py.
 
 DROP VIEW IF EXISTS v_sales_enriched;
 DROP TABLE IF EXISTS sales;

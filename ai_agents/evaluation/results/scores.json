@@ -1,0 +1,119 @@
+{
+ "sql-01": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-02": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-03": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-04": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-05": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-06": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-07": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-08": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-09": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-10": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-11": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-12": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-13": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-01": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-02": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-03": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-04": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-05": {
+  "passed": true,
+  "detail": ""
+ },
+ "doc-01": {
+  "retrieval_hit": true
+ },
+ "doc-02": {
+  "retrieval_hit": false
+ },
+ "doc-03": {
+  "retrieval_hit": false
+ },
+ "doc-04": {
+  "retrieval_hit": true
+ },
+ "doc-05": {
+  "retrieval_hit": false
+ },
+ "doc-06": {
+  "retrieval_hit": false
+ },
+ "doc-07": {
+  "retrieval_hit": true
+ },
+ "doc-08": {
+  "retrieval_hit": true
+ },
+ "doc-09": {
+  "retrieval_hit": true
+ },
+ "doc-10": {
+  "retrieval_hit": true
+ },
+ "doc-11": {
+  "retrieval_hit": true
+ },
+ "doc-12": {
+  "retrieval_hit": false
+ },
+ "doc-13": {
+  "retrieval_hit": true
+ },
+ "doc-14": {
+  "retrieval_hit": true
+ },
+ "doc-15": {
+  "retrieval_hit": false
+ }
+}

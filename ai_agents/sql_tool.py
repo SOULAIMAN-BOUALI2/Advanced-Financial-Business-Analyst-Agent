@@ -18,7 +18,7 @@ from functools import lru_cache
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
-from ai_agents.llm import ask
+from ai_agents.llm import TRANSIENT_MARKERS, ask
 from ai_agents.prompts import TEXT_TO_SQL_PROMPT
 
 load_dotenv()
@@ -167,6 +167,8 @@ def run_text_to_sql(question: str) -> dict:
             return {"sql": safe_sql, "columns": columns, "rows": rows, "error": None}
         except Exception as exc:  # validation or SQL error -> let the LLM retry once
             error = str(exc).splitlines()[0][:300]
+            if any(marker in str(exc) for marker in TRANSIENT_MARKERS):
+                break  # quota / overload: asking the model again would only waste quota
     return {"sql": sql, "columns": [], "rows": [], "error": error}
 
 

@@ -49,7 +49,7 @@ def sql_node(state: AgentState) -> dict:
 
 def rag_node(state: AgentState) -> dict:
     try:
-        return {"rag_chunks": search(state["question"], k=4)}
+        return {"rag_chunks": search(state["question"])}
     except Exception as exc:
         return {"rag_chunks": [], "errors": state.get("errors", []) + [f"RAG: {exc}"]}
 

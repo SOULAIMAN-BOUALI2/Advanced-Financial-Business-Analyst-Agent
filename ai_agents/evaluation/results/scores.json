@@ -1,7 +1,7 @@
 {
  "sql-01": {
-  "passed": false,
-  "detail": "the agent produced no SQL"
+  "passed": true,
+  "detail": ""
  },
  "sql-02": {
   "passed": true,
@@ -40,8 +40,8 @@
   "detail": ""
  },
  "sql-11": {
-  "passed": false,
-  "detail": "the agent produced no SQL"
+  "passed": true,
+  "detail": ""
  },
  "sql-12": {
   "passed": true,
@@ -56,11 +56,11 @@
   "detail": ""
  },
  "abs-02": {
-  "passed": true,
+  "passed": false,
   "detail": ""
  },
  "abs-03": {
-  "passed": false,
+  "passed": true,
   "detail": ""
  },
  "abs-04": {

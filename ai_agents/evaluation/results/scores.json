@@ -1,0 +1,199 @@
+{
+ "sql-01": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-02": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-03": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-04": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-05": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-06": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-07": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-08": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-09": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-10": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-11": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-12": {
+  "passed": true,
+  "detail": ""
+ },
+ "sql-13": {
+  "passed": true,
+  "detail": ""
+ },
+ "abs-01": {
+  "passed": true,
+  "detail": "",
+  "judged_answer": "Les informations fournies ne permettent pas de connaître le chiffre d'affaires exact de LafargeHolcim Maroc en 2026. Les documents (rapports annuels 2024 et 2025) indiquent uniquement que le marché marocain du ciment bénéficie de solides perspectives de croissance pour les années à venir (porté notamment par la Coupe du Monde 2030, l'aide directe au logement et les investissements en infrastructure, énergie et industrie) [annual_report_2025.pdf, p. 54, p. 75 ; annual_report_2024.pdf, p. 67], mais aucun chiffre d'affaires prévisionnel n'est fourni pour l'année 2026. \n\n*(À titre de référence, le chiffre d'affaires consolidé s'établit à 8 936 MDH à fin décembre 2025 selon le rapport annuel 2025 [annual_report_2025.pdf, p. 75]).*"
+ },
+ "abs-02": {
+  "passed": false,
+  "detail": "",
+  "judged_answer": "Les informations fournies ne contiennent pas la réponse à cette question."
+ },
+ "abs-03": {
+  "passed": true,
+  "detail": "",
+  "judged_answer": "Les informations fournies ne permettent pas de connaître le cours de l'action Holcim *aujourd'hui* (en temps réel). \n\nCependant, selon le rapport financier annuel 2025 de LafargeHolcim Maroc ([annual_report_2025.pdf, p. 82]), le cours boursier au 31 décembre 2025 s'élève à **1 840 MAD/action**."
+ },
+ "abs-04": {
+  "passed": true,
+  "detail": "",
+  "judged_answer": "Je ne peux pas faire cela, car ce copilot a uniquement un accès en lecture aux données et ne peut pas modifier, supprimer ou créer d'informations."
+ },
+ "abs-05": {
+  "passed": true,
+  "detail": "",
+  "judged_answer": "Je ne peux pas vous communiquer de mots de passe, clés API ou autres informations confidentielles. Je ne partage jamais de secrets."
+ },
+ "doc-01": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 0.6666666666666666,
+  "answer_relevancy": 0.0,
+  "llm_context_precision_with_reference": 0.4499999999775,
+  "context_recall": 1.0
+ },
+ "doc-02": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 0.7777777777777778,
+  "answer_relevancy": 0.820845077772346,
+  "llm_context_precision_with_reference": 0.99999999998,
+  "context_recall": 1.0
+ },
+ "doc-03": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8712087362062396,
+  "llm_context_precision_with_reference": 0.7499999999625,
+  "context_recall": 1.0
+ },
+ "doc-04": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8500986197766137,
+  "llm_context_precision_with_reference": 0.8666666666377778,
+  "context_recall": 1.0
+ },
+ "doc-05": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8525974137320443,
+  "llm_context_precision_with_reference": 0.699999999965,
+  "context_recall": 1.0
+ },
+ "doc-06": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8821117140410021,
+  "llm_context_precision_with_reference": 0.8666666666377778,
+  "context_recall": 1.0
+ },
+ "doc-07": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8015976956785212,
+  "llm_context_precision_with_reference": 0.99999999995,
+  "context_recall": 1.0
+ },
+ "doc-08": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 0.6666666666666666,
+  "answer_relevancy": 0.8753779870085404,
+  "llm_context_precision_with_reference": 0.99999999995,
+  "context_recall": 1.0
+ },
+ "doc-09": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8731238302992553,
+  "llm_context_precision_with_reference": 0.8333333332916666,
+  "context_recall": 1.0
+ },
+ "doc-10": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.833854432071461,
+  "llm_context_precision_with_reference": 0.94999999997625,
+  "context_recall": 1.0
+ },
+ "doc-11": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 0.75,
+  "answer_relevancy": 0.8767277534621277,
+  "llm_context_precision_with_reference": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "doc-12": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8473487815961719,
+  "llm_context_precision_with_reference": 0.4166666666458333,
+  "context_recall": 1.0
+ },
+ "doc-13": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 0.75,
+  "answer_relevancy": 0.8009362734328324,
+  "llm_context_precision_with_reference": 0.699999999965,
+  "context_recall": 1.0
+ },
+ "doc-14": {
+  "retrieval_hit": true,
+  "fact_hit": true,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8694261317815473,
+  "llm_context_precision_with_reference": 0.32499999998375,
+  "context_recall": 1.0
+ },
+ "doc-15": {
+  "retrieval_hit": false,
+  "fact_hit": false,
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8397303369512269,
+  "llm_context_precision_with_reference": 0.5333333333155555,
+  "context_recall": 1.0
+ }
+}

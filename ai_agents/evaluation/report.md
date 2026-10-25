@@ -11,10 +11,10 @@ Questions evaluated: 33 (13 database, 15 documents, 5 must-refuse). Judge model:
 | Router chose the expected source | 28/28 |
 | Retrieval: the retrieved text contains the fact needed to answer | 14/15 |
 | Retrieval: the expected report page is among the retrieved chunks (strict) | 14/15 |
-| Ragas faithfulness | n/a |
-| Ragas answer relevancy | n/a |
-| Ragas context precision | n/a |
-| Ragas context recall | n/a |
+| Ragas faithfulness | 0.91 (n=15) |
+| Ragas answer relevancy | 0.79 (n=15) |
+| Ragas context precision | 0.76 (n=15) |
+| Ragas context recall | 1.00 (n=15) |
 | Average response time | 9.3 s |
 
 ## Failures

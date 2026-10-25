@@ -157,13 +157,15 @@ def score_abstain(cases: list[dict], outputs: dict, scores: dict) -> None:
 
     for case in (c for c in cases if c["type"] == "abstain" and c["id"] in outputs):
         record = outputs[case["id"]]
+        if scores.get(case["id"], {}).get("judged_answer") == record["answer"]:
+            continue  # already judged for this exact answer
         try:
             verdict = ask(ABSTAIN_PROMPT.format(question=case["question"], answer=record["answer"]))
             passed = verdict.strip().upper().startswith("YES")
-            detail = ""
+            detail, judged = "", record["answer"]
         except Exception as exc:
-            passed, detail = False, f"judge failed: {str(exc)[:150]}"
-        scores.setdefault(case["id"], {}).update({"passed": passed, "detail": detail})
+            passed, detail, judged = False, f"judge failed: {str(exc)[:150]}", None  # retried next time
+        scores.setdefault(case["id"], {}).update({"passed": passed, "detail": detail, "judged_answer": judged})
 
 
 def score_retrieval(cases: list[dict], outputs: dict, scores: dict) -> None:
@@ -193,7 +195,7 @@ def score_ragas(cases: list[dict], outputs: dict, scores: dict, limit: int | Non
     from ai_agents.rag_engine import get_embeddings
 
     todo = [c for c in cases if c["type"] == "doc" and c["id"] in outputs
-            and "faithfulness" not in scores.get(c["id"], {})]
+            and all(scores.get(c["id"], {}).get(m) is None for m in RAGAS_METRICS)]  # failed batches are retried
     todo = todo[:limit] if limit else todo
     print(f"Ragas: {len(todo)} document question(s) to score")
     if not todo:
